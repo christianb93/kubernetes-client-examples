@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
+	"path/filepath"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/homedir"
 )
 
 func main() {
-	kubeconfig := "/home/chr/.kube/config"
+        home := homedir.HomeDir()
+	kubeconfig := filepath.Join(home, ".kube", "config")
 	fmt.Printf("%-20s  %-10s %s\n", "NAME", "ARCH", "OS")
 
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
